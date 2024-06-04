@@ -1,5 +1,4 @@
 pipeline {
-    def app
     agent {
         label "kubeagent"
     }
@@ -11,7 +10,10 @@ pipeline {
         }
         stage('Build image') {
             steps {
-                app = docker.build("lnahuel/test")
+                script {
+                    def app
+                    app = docker.build("lnahuel/test")
+                }
             }
         }
         stage('Test image') {
