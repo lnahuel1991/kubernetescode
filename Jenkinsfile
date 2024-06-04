@@ -1,8 +1,13 @@
 node {
     def app
-    stage('Initialize para el funcionamiento de docker'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    //stage('Initialize para el funcionamiento de docker'){
+    //    def dockerHome = tool 'myDocker'
+    //    env.PATH = "${dockerHome}/bin:${env.PATH}"
+    //}
+    stages {
+        stage('Add Jenkins user to Docker group') {
+            steps {
+                sh 'sudo usermod -aG docker $USER'
     }
 
     stage('Clone repository') {
