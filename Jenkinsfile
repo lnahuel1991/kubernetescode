@@ -15,9 +15,7 @@ pipeline {
         }
         stage('Test image') {
             steps {
-                app.inside {
-					sh 'echo "Tests passed"'
-				}
+		echo "hola"
             }
         }
     }
