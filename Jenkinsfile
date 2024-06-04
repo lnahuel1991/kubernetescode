@@ -1,4 +1,5 @@
 pipeline {
+    def app
     agent {
         label "kubeagent"
     }
@@ -15,7 +16,7 @@ pipeline {
         }
         stage('Test image') {
             steps {
-		echo "hola"
+                echo "hola"
             }
         }
     }
