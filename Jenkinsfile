@@ -1,37 +1,24 @@
-node {
-    def app
-    stage('Add Jenkins user to Docker group') {
-        sh 'sudo usermod -aG docker $USER'
+pipeline {
+    agent {
+        label "kubeagent"
     }
-
-    stage('Clone repository') {
-      
-
-        checkout scm
-    }
-
-    stage('Build image') {
-  
-       app = docker.build("lnahuel/test")
-    }
-
-    stage('Test image') {
-  
-
-        app.inside {
-            sh 'echo "Tests passed"'
+    stages {
+        stage('Clone repository') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build image') {
+            steps {
+                app = docker.build("lnahuel/test")
+            }
+        }
+        stage('Test image') {
+            steps {
+                app.inside {
+					sh 'echo "Tests passed"'
+				}
+            }
         }
     }
-
-    stage('Push image') {
-        
-        docker.withRegistry('https://registry.hub.docker.com', 'Dockerhub') {
-            app.push("${env.BUILD_NUMBER}")
-        }
-    }
-    
-    stage('Trigger ManifestUpdate') {
-                echo "triggering updatemanifestjob"
-                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
-        }
 }
