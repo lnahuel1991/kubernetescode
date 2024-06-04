@@ -1,9 +1,7 @@
 node {
     def app
     stage('Add Jenkins user to Docker group') {
-        steps {
-            sh 'sudo usermod -aG docker $USER'
-        }
+        sh 'sudo usermod -aG docker $USER'
     }
 
     stage('Clone repository') {
