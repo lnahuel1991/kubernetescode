@@ -1,16 +1,11 @@
 pipeline {
-    agent any
-    stages {
-        stage('Install Docker') {
-            steps {
-                script {
-                    // Instalar Docker
-                    sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
-                    sh 'sh get-docker.sh'
-                    //sh 'usermod -aG docker jenkins'
-                }
-            }
+    agent {
+        docker {
+            image 'mudit097/sample_nodejs:latest'
+            reuseNode true
         }
+    }
+    stages {
         stage('Clone repository') {
             steps {
                 checkout scm
@@ -19,8 +14,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    def app
-                    app = docker.build("lnahuel/test")
+                    // Aquí no necesitas construir la imagen, ya que el agente Docker proporcionará un contenedor con la imagen especificada
                 }
             }
         }
