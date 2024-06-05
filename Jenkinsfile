@@ -10,10 +10,8 @@ pipeline {
         }
         stage('Build image') {
             steps {
-                script {
                     def app
                     app = docker.build("lnahuel/test")
-                }
             }
         }
         stage('Test image') {
