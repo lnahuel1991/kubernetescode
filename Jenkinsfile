@@ -5,9 +5,9 @@ pipeline {
             steps {
                 script {
                     // Instalar Docker
-                    sh 'sudo curl -fsSL https://get.docker.com -o get-docker.sh'
-                    sh 'sudo sh get-docker.sh'
-                    sh 'sudo usermod -aG docker jenkins'
+                    sh 'curl -fsSL https://get.docker.com -o get-docker.sh'
+                    sh 'sh get-docker.sh'
+                    //sh 'usermod -aG docker jenkins'
                 }
             }
         }
