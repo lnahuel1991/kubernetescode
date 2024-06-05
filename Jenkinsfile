@@ -1,7 +1,7 @@
 pipeline {
-    agent {
-        label "kubeagent"
-    }
+   // agent {
+   //     label "kubeagent"
+  //  }
     stages {
         stage('Clone repository') {
             steps {
